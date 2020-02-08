@@ -12,7 +12,9 @@
   "dependencies": {
     "ce": "^0.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "create-extension-cli": "0.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zvakanaka/npm-stats-extension.git"
