@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "NPM Stats",
+  "description": "See stats next to npmjs.com search results",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.npmjs.com/search/*"
+      ],
+      "js": [
+        "dist/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

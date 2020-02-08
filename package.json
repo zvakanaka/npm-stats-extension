@@ -1,0 +1,24 @@
+{
+  "name": "npm-stats-extension",
+  "version": "0.0.1",
+  "description": "See stats next to npmjs.com search results",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx ce"
+  },
+  "keywords": [],
+  "author": "Adam Quinton",
+  "license": "MIT",
+  "dependencies": {
+    "ce": "^0.0.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zvakanaka/npm-stats-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zvakanaka/npm-stats-extension/issues"
+  },
+  "homepage": "https://github.com/zvakanaka/npm-stats-extension#readme"
+}
