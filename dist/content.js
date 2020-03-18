@@ -1,10 +1,12 @@
 console.log('NPM Stats extension Loaded (v0.1)');
+  
+  // JavaScript
   const script = document.createElement('script');
   script.textContent = `
-  /*******************************************************************************
-   * source file '/Users/qui10001/dev/create-extension/build/../client/utils.js'
-   ******************************************************************************/
-  function timeout(ms) { return new Promise(r => setTimeout(r, ms)); }
+/*******************************************************************************
+ * JS source file 'utils.js' (helper from create-extension)
+ ******************************************************************************/
+function timeout(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 /*
  * USAGE:
@@ -81,18 +83,18 @@ async function fetchHtml(url, options, useCache = false) { // cache response and
 
 function cleanBody(bodyString) {
   const bodyClean = bodyString
-    .replace(/<script/g, '<scmipt')
+    .replace(/<script/g, '<smcript')
     .replace(/<img /g, '<smimg ')
     .replace(/<iframe/g, '<smiframe')
-    .replace(/<style/g, '<smyle');
+    .replace(/<style/g, '<smtyle');
   return bodyClean;
 }
 
-  /*******************************************************************************
-   * source file 'src/js/content.js' (wrapped in IIFE)
-   ******************************************************************************/
-  (async function() {
-  async function reprocess() {
+/*******************************************************************************
+ * JS source file 'src/js/content.js' (wrapped in IIFE)
+ ******************************************************************************/
+(async function() {
+async function reprocess() {
     const list = Array.from(document.querySelectorAll('main > div > aside + div section'))
     .map(section => {
       const titleEl = section.querySelector('div > div > a')
@@ -117,14 +119,13 @@ function cleanBody(bodyString) {
 }
 
 // process for the 1st time =P
-console.log('processing');
 await reprocess();
-console.log('done processing');
-
 
 const observer = new MutationObserver(() => reprocess());
 observer.observe(document.querySelector('main > div:nth-child(2) > div'), { childList: true });
 
-  })();`;
+})();`;
   document.head.append(script);
+  
+  
   
