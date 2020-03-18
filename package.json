@@ -1,6 +1,6 @@
 {
   "name": "npm-stats-extension",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "See stats next to npmjs.com search results",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "ce": "^0.0.1"
   },
   "devDependencies": {
-    "create-extension-cli": "0.0.1"
+    "create-extension-cli": "0.1.0"
   },
   "repository": {
     "type": "git",

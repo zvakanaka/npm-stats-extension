@@ -2,7 +2,7 @@ console.log('NPM Stats extension Loaded (v0.1)');
   const script = document.createElement('script');
   script.textContent = `
   /*******************************************************************************
-   * source file '/home/adam/dev/create-extension/build/../client/utils.js'
+   * source file '/Users/qui10001/dev/create-extension/build/../client/utils.js'
    ******************************************************************************/
   function timeout(ms) { return new Promise(r => setTimeout(r, ms)); }
 
@@ -92,26 +92,38 @@ function cleanBody(bodyString) {
    * source file 'src/js/content.js' (wrapped in IIFE)
    ******************************************************************************/
   (async function() {
-  const list = Array.from(document.querySelectorAll('main > div > aside + div section'))
-  .map(section => {
-    const titleEl = section.querySelector('div > div > a')
-    return {
-      sectionEl: section,
-      titleEl,
-      title: titleEl.textContent
-    }
-  });
+  async function reprocess() {
+    const list = Array.from(document.querySelectorAll('main > div > aside + div section'))
+    .map(section => {
+      const titleEl = section.querySelector('div > div > a')
+      return {
+        sectionEl: section,
+        titleEl,
+        title: titleEl.textContent
+      }
+    });
 
-const fetchOptions = {};
-const pArr = list.map(async (item) => await fetchHtml(\`https://www.npmjs.com/package/\${item.title}\`, fetchOptions));
-const listResponses = await Promise.all(pArr);
-listResponses.forEach((data, i) => {
-  const parseEl = document.createElement('div');
-  parseEl.innerHTML = cleanBody(data);
-  const downloads = parseEl.querySelector('.order-0 > div > div > div > p').textContent;
-  const { title, titleEl } = list[i];
-  titleEl.textContent = \`\${title} (\${downloads})\`;
-});
+    const fetchOptions = {};
+    const pArr = list.map(async (item) => await fetchHtml(\`https://www.npmjs.com/package/\${item.title}\`, fetchOptions));
+    const listResponses = await Promise.all(pArr);
+    listResponses.forEach((data, i) => {
+      const parseEl = document.createElement('div');
+      parseEl.innerHTML = cleanBody(data);
+      const downloadsEl = parseEl.querySelector('.order-0 > div > div > div > p');
+      const downloads = downloadsEl ? downloadsEl.textContent : '?';
+      const { title, titleEl } = list[i];
+      titleEl.textContent = \`\${title} (\${downloads})\`;
+    });
+}
+
+// process for the 1st time =P
+console.log('processing');
+await reprocess();
+console.log('done processing');
+
+
+const observer = new MutationObserver(() => reprocess());
+observer.observe(document.querySelector('main > div:nth-child(2) > div'), { childList: true });
 
   })();`;
   document.head.append(script);
